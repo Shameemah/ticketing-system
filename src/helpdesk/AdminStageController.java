@@ -56,7 +56,7 @@ public class AdminStageController extends DAO implements Initializable {
     @FXML
     private ChoiceBox<String> status;
     @FXML
-    private ChoiceBox<?> severity;
+    private ChoiceBox<String> severity;
     @FXML
     private TextField email;
     @FXML
@@ -64,15 +64,15 @@ public class AdminStageController extends DAO implements Initializable {
     @FXML
     private TextField fname;
     @FXML
-    private ChoiceBox<?> classification;
+    private ChoiceBox<String> classification;
     @FXML
-    private ChoiceBox<?> type;
+    private ChoiceBox<String> type;
     @FXML
     private TextArea internalNotes;
     @FXML
     private TextArea description;
     @FXML
-    private ChoiceBox<?> assignee;
+    private ChoiceBox<String> assignee;
     @FXML
     private Button newTicket;
     @FXML
@@ -331,14 +331,32 @@ public class AdminStageController extends DAO implements Initializable {
             rowset.setInt(1, value);
             rowset.execute();
             
-            
-            
             while(rowset.next()) {
                 ticketNumber.setText(rowset.getString(1));
                 summary.setText(rowset.getString(2));
                 status.setValue(rowset.getString(3));
-                
+                severity.setValue(rowset.getString(4));
+                classification.setValue(rowset.getString(5));
+                type.setValue(rowset.getString(6));
+                internalNotes.setText(rowset.getString(7));
+                description.setText(rowset.getString(8));
+                assignee.setValue(rowset.getString(9));
             }
+            
+            JdbcRowSet rowset1 = RowSetProvider.newFactory().createJdbcRowSet();
+            rowset1.setUrl(url);
+            rowset1.setUsername(username);
+            rowset1.setPassword(password);
+            rowset1.setCommand("SELECT email, last_name, first_name FROM s_fuse_contact_info_table WHERE ticket_number = ?");
+            rowset1.setInt(1, value);
+            rowset1.execute();
+            
+            while(rowset1.next()) {
+                email.setText(rowset1.getString(1));
+                lname.setText(rowset1.getString(2));
+                fname.setText(rowset1.getString(3));
+            }
+            
         }catch (SQLException e){
             
         }

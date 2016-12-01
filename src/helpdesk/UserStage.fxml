@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane id="AnchorPane" maxHeight="773.0" maxWidth="907.0" minHeight="773.0" minWidth="902.0" prefHeight="773.0" prefWidth="902.0" styleClass="login-background" stylesheets="@helpdesk/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpdesk.UserStageController">
+   <children>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="773.0" prefWidth="902.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.5" layoutX="234.0" layoutY="123.0" orientation="VERTICAL" prefHeight="638.0" prefWidth="904.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="123.0">
+              <items>
+                <AnchorPane fx:id="details" minHeight="0.0" minWidth="0.0" prefHeight="579.0" prefWidth="882.0">
+                     <children>
+                        <TableView fx:id="table" layoutX="187.0" layoutY="49.0" prefHeight="314.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <ScrollPane hbarPolicy="NEVER" layoutX="213.0" layoutY="113.0" prefHeight="517.0" prefWidth="627.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="840.0" prefWidth="897.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="-2.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="888.0" />
+                                    <TextField fx:id="summary" layoutX="23.0" layoutY="72.0" prefHeight="27.0" prefWidth="854.0" />
+                                    <ChoiceBox fx:id="status" layoutX="22.0" layoutY="133.0" prefWidth="150.0" value="Open">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Open" />
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                    <ChoiceBox fx:id="severity" layoutX="723.0" layoutY="133.0" prefWidth="150.0" value="Severity 3"> 
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Severity 3" />
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutY="183.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="901.0" />
+                                    <TextField fx:id="email" layoutX="23.0" layoutY="259.0" prefHeight="27.0" prefWidth="167.0" />
+                                    <TextField fx:id="fname" layoutX="717.0" layoutY="259.0" prefHeight="27.0" prefWidth="161.0" />
+                                    <TextField fx:id="lname" layoutX="370.0" layoutY="259.0" prefHeight="27.0" prefWidth="167.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="1.0" layoutY="307.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="895.0" />
+                                    <ChoiceBox fx:id="classification" layoutX="22.0" layoutY="367.0" prefHeight="27.0" prefWidth="183.0" value="Make a Selection">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Make a Selection" />
+                                                <String fx:value="Problem" />
+                                                <String fx:value="Service Request" />
+                                                <String fx:value="Inquiry/Question" />
+                                                <String fx:value="Project" /> 
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                    <ChoiceBox fx:id="type" layoutX="697.0" layoutY="363.0" prefHeight="27.0" prefWidth="181.0" value="Make a Selection">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Make a Selection" />
+                                                <String fx:value="A/V equipment" />
+                                                <String fx:value="A/V maintenance" />
+                                                <String fx:value="Accounts/IDs" />
+                                                <String fx:value="Database" />
+                                                <String fx:value="Desktop Software" />
+                                                <String fx:value="Enterprise Software" />
+                                                <String fx:value="Hardware-Systems" />
+                                                <String fx:value="Hardware-User" />
+                                                <String fx:value="HR" />
+                                                <String fx:value="MyIIT Portal" />
+                                                <String fx:value="Network" />
+                                                <String fx:value="Other" />
+                                                <String fx:value="Telecommunications" />   
+                                                <String fx:value="Theft" />
+                                                <String fx:value="Virus/Security" />  
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
+                                    <TextArea fx:id="description" layoutX="21.0" layoutY="428.0" prefHeight="245.0" prefWidth="855.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="2.0" layoutY="704.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="894.0" />
+                                    <ChoiceBox fx:id="assignee" layoutX="28.0" layoutY="784.0" prefHeight="23.0" prefWidth="273.0" value="Support Desk">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Support Desk" />
+                                            </FXCollections>
+                                        </items> 
+                                    </ChoiceBox>
+                                    <Label layoutX="24.0" layoutY="6.0" text="Ticket #:" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="ticketNum" layoutX="91.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="26.0" layoutY="53.0" text="Summary*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="729.0" layoutY="111.0" text="Severity*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="374.0" layoutY="235.0" text="Last Name*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="27.0" layoutY="236.0" text="Email Address:*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="723.0" layoutY="236.0" text="First Name*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="23.0" layoutY="348.0" text="Incident Classification">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="701.0" layoutY="344.0" text="Type">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="405.0" text="Description*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="752.0" prefHeight="17.0" prefWidth="89.0" text="Assignees*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="28.0" layoutY="190.0" text="Contact Information" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="26.0" layoutY="313.0" text="Incident Information" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="30.0" layoutY="709.0" text="Assignee Information" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="21.0" layoutY="111.0" text="Status*" textFill="RED">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <ImageView fitHeight="53.0" fitWidth="321.0" layoutX="14.0" layoutY="38.0">
+               <image>
+                  <Image url="@TicketMaster.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="654.0" layoutY="51.0" spacing="15.0" styleClass="rich-blue">
+               <children>
+                  <Button fx:id="newTicket" layoutX="559.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="New" />
+                  <Button fx:id="saveTicket" layoutX="643.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="Save" />
+                  <Button fx:id="searchTicket" layoutX="802.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="Search" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Label fx:id="messageLabel" layoutX="382.0" layoutY="60.0" prefHeight="18.0" prefWidth="149.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="closeIcon" fitHeight="25.0" fitWidth="26.0" layoutX="874.0" layoutY="2.0" onMouseClicked="#closeIconFired">
+         <image>
+            <Image url="@red-close-button-icon-32177.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,9 @@
+.login-background {
+  -fx-background-color: rgba(232, 232, 232, 0.75);
+}
+
+.rich-blue {
+    -fx-background-color: transparent;
+    -fx-font-size: 18px;
+    -fx-text-fill: #0066cc;
+}

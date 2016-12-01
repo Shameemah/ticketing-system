@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="280.0" maxWidth="400.0" minHeight="280.0" minWidth="400.0" prefHeight="280.0" prefWidth="400.0" styleClass="login-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpdesk.LogInController">
+   <children>
+      <Text layoutX="146.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TextField fx:id="username" layoutX="73.0" layoutY="98.0" prefHeight="27.0" prefWidth="267.0" promptText="USERNAME" styleClass="text-box" />
+      <Button fx:id="loginButton" layoutX="69.0" layoutY="205.0" mnemonicParsing="false" onAction="#loginButtonFired" prefHeight="35.0" prefWidth="93.0" styleClass="rich-blue" text="LOG IN" />
+      <Button fx:id="exitButton" layoutX="259.0" layoutY="205.0" mnemonicParsing="false" onAction="#exitButtonFired" prefHeight="35.0" prefWidth="83.0" styleClass="rich-blue" text="EXIT" />
+      <ImageView fitHeight="56.0" fitWidth="304.0" layoutX="82.0" layoutY="28.0">
+         <image>
+            <Image url="@TicketMaster.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="password" layoutX="73.0" layoutY="158.0" prefHeight="27.0" prefWidth="267.0" promptText="PASSWORD" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="105.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="HelpDesk.jnlp">
+  <information>
+    <title>HelpDesk</title>
+    <vendor>shameemah1</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="HelpDesk.jar" size="364661" download="eager" />
+    <jar href="lib/jbcrypt-0.3m.jar" size="17750" download="eager" />
+    <jar href="lib/mysql-connector-java-5.1.40-bin.jar" size="990927" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="HelpDesk" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="helpdesk.HelpDesk"  name="HelpDesk" />
+  <update check="always"/>
+</jnlp>

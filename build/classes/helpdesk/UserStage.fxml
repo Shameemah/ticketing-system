@@ -186,11 +186,10 @@
                   <Image url="@TicketMaster.png" />
                </image>
             </ImageView>
-            <HBox layoutX="654.0" layoutY="51.0" spacing="15.0" styleClass="rich-blue">
+            <HBox layoutX="714.0" layoutY="51.0" spacing="15.0" styleClass="rich-blue" stylesheets="@style.css">
                <children>
                   <Button fx:id="newTicket" layoutX="559.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="New" />
                   <Button fx:id="saveTicket" layoutX="643.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="Save" />
-                  <Button fx:id="searchTicket" layoutX="802.0" layoutY="54.0" mnemonicParsing="false" styleClass="rich-blue" text="Search" />
                </children>
             </HBox>
          </children>

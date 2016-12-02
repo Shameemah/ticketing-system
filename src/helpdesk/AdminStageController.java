@@ -140,7 +140,6 @@ public class AdminStageController extends DAO implements Initializable {
         
         //variable to retrieve ticket_id
         String lastid;
-        
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
            
@@ -286,6 +285,145 @@ public class AdminStageController extends DAO implements Initializable {
 
     @FXML
     private void updateButtonFired(ActionEvent event) {
+        String lastid;
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        
+        int value = table.getSelectionModel().getSelectedItem().getTicketNum();
+           
+         try{
+		      //Open a connection
+		      System.out.println("Connecting to a selected database...");
+		      this.connection = DriverManager.getConnection(url, username, password);
+		      System.out.println("Connected database successfully...");
+                      
+		      //Insert data into tickets table
+		      System.out.println("Updating records into the table...");
+		      PreparedStatement pstmt = connection.prepareStatement(" UPDATE s_fuse_ticket_table "
+                              + " SET summary=?, status=?, severity=?, classification=?, type=?, internal_notes=?, description=?, assignees=? "
+                              + " WHERE ticket_id=?");
+                      
+                          if(summary.getText().equals("")){
+                              alert.setContentText("Summary cannot be blank");
+                              alert.show();
+                              throw new SQLException();
+                          } else {
+                              pstmt.setString(1, summary.getText()); 
+                          }
+		    	  pstmt.setString(2, status.getSelectionModel().getSelectedItem().toString());
+		    	  pstmt.setString(3, severity.getSelectionModel().getSelectedItem().toString());
+                          if(classification.getSelectionModel().getSelectedItem().toString().equals("Make a Selection")){
+                              alert.setContentText("Please select a classification");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                               pstmt.setString(4, classification.getSelectionModel().getSelectedItem().toString());
+                          }
+                          if(type.getSelectionModel().getSelectedItem().toString().equals("Make a Selection")){
+                              alert.setContentText("Please select a type");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                              pstmt.setString(5, type.getSelectionModel().getSelectedItem().toString());
+                          }
+                          pstmt.setString(6, internalNotes.getText());
+                          if(description.getText().equals("")){
+                              alert.setContentText("Description cannot be blank");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                              pstmt.setString(7, description.getText());
+                          }
+                          pstmt.setString(8, assignee.getSelectionModel().getSelectedItem().toString());
+                          pstmt.setInt(9, value);
+                          
+                        pstmt.executeUpdate();
+                        System.out.println("Updated records...");
+                        
+                        //Insert data into contact_info_table
+                        System.out.println("Updating records in contact_info table...");
+                        PreparedStatement pstmt2 = connection.prepareStatement(" UPDATE s_fuse_contact_info_table "
+                              + " SET email=?, last_name=?, first_name=? "
+                              + " WHERE ticket_number=?");
+		  
+                          if((!email.getText().contains("@") && !email.getText().contains(".")) || email.getText().equals("")){
+                              alert.setContentText("Enter a valid email");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                              pstmt2.setString(1, email.getText());
+                          }
+                          if(lname.getText().equals("")){
+                              alert.setContentText("Last name cannot be blank");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                              pstmt2.setString(2, lname.getText());
+                          }
+                          if(fname.getText().equals("")){
+                              alert.setContentText("First name cannot be blank");
+                              alert.show();
+                              throw new SQLException();
+                          }else {
+                              pstmt2.setString(3, fname.getText());
+                          }
+                          pstmt2.setInt(4, value);
+                          
+		    	  pstmt2.executeUpdate();
+                          System.out.println("Updated records...");
+                          
+                          //get date for date_info table
+                          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                          LocalDateTime now = LocalDateTime.now();
+                         
+                          //insert date_closed into table
+                          if(status.getSelectionModel().getSelectedItem().equals("Closed"))
+                          {
+                            System.out.println("Updating records in date_info table...");
+                            PreparedStatement pstmt3 = connection.prepareStatement(" UPDATE s_fuse_date_info_table "
+                              + " SET date_closed=? "
+                              + " WHERE ticket_number=?");
+                            
+                            pstmt3.setString(1, dtf.format(now));
+                            pstmt3.setInt(2, value);
+                            
+                            pstmt3.executeUpdate();
+                            System.out.println("Inserted records...");   
+                          }
+                            
+                          
+                          //display ticket created
+                          messageLabel.setText("Ticket number " + value + " updated successfully");
+                          adm.fadeText(messageLabel);
+                      
+                          //clear all fields
+                          clear();
+		   }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   }catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		         {
+		            connection.close();
+		         }
+		      }catch(SQLException se){
+		      }// do nothing
+		      try{
+		         if(connection!=null)
+		         {
+		            connection.close();
+		         }
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		   }//end try
+		   System.out.println("Goodbye!");
+        
     }
 
     @FXML

@@ -231,11 +231,7 @@
             <Button fx:id="deleteTicket" layoutX="718.0" layoutY="54.0" mnemonicParsing="false" onAction="#deleteButtonFired" styleClass="rich-blue" text="Delete" />
          </children>
       </HBox>
-      <Label fx:id="messageLabel" layoutX="286.0" layoutY="64.0" prefHeight="19.0" prefWidth="323.0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+      <Label fx:id="messageLabel" layoutX="286.0" layoutY="63.0" prefHeight="19.0" prefWidth="252.0" />
       <ImageView fx:id="closeIcon" fitHeight="25.0" fitWidth="25.0" layoutX="1034.0" layoutY="2.0" onMouseClicked="#closeIconFired">
          <image>
             <Image url="@red-close-button-icon-32177.png" />

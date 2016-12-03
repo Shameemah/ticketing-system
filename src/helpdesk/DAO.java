@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * This class contains the Database connection information and the methods to
+ * Contains the Database connection information and the methods to
  * create the tables and insert login information into the login table
  * @author Shameemah Fuseini-Codjoe
  * @version NetBeans IDE 8.2 (Build 201609300101)
@@ -41,7 +41,7 @@ public class DAO {
     }
     
        /**
-        * This method creates all the tables required in the database
+        * Creates all the tables required in the database
         */
        public void createTables() {
 		
@@ -138,7 +138,7 @@ public class DAO {
        }
         
        /**
-        * This method inserts the login information into the login table
+        * Inserts the login information into the login table
         */
         public void insertRecords()
 	{
@@ -193,7 +193,7 @@ public class DAO {
 		}//end main
 
         /**
-         * This method closes the DB connection
+         * Closes the DB connection
          */
 	public void close() {
     	try {

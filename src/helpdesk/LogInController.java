@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpdesk;
 
+//imports
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -27,12 +23,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- *
- * @author shameemah1
+ * This is the FXML Controller class for LogIn.fxml.It initializes
+ * the variables and contains the methods that define various actions when
+ * buttons are clicked
+ * @author Shameemah Fuseini-Codjoe
+ * @version NetBeans IDE 8.2 (Build 201609300101)
  */
 public class LogInController implements Initializable  {
 
-    
     @FXML
     public TextField username;
     @FXML
@@ -44,7 +42,12 @@ public class LogInController implements Initializable  {
     @FXML
     private Text errorMessage;
     
-    //defining action when login button is clicked
+    /**
+     * This method checks that the username and password are correct, and opens
+     * the admin stage or user stage depending on the role of the user logging in
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void loginButtonFired(ActionEvent event) throws IOException{
 	String userName = this.username.getText();
@@ -53,21 +56,22 @@ public class LogInController implements Initializable  {
         //Instantiate PasswordHash class
         PasswordHash ph = new PasswordHash();
        
-	//Get user
+	//Get user by username
 	LoginModel l = new LoginModel();
 	boolean blnUser = l.findByUsername(userName);
 	l.close();
         
-	//If user not found
+	//If the user is not in the database
 	if(blnUser == false) {
 		errorMessage.setText("User does not exist. Try again.");
 		return;
 	}
         
-	//Set user as Logged in user + valid user by role
+                //Check if password matche
 		try {
                     if(ph.checkPassword(passWord, l.getPassword()))
                     {
+                        //check if role is admin and open admin stage
                         if(l.getRole().equals("admin") ) {
                             Parent admin_stage = FXMLLoader.load(getClass().getResource("AdminStage.fxml"));
                             Scene admin_stage_scene = new Scene(admin_stage);
@@ -76,6 +80,7 @@ public class LogInController implements Initializable  {
                             app_stage.hide();
                             app_stage.setScene(admin_stage_scene);
                             app_stage.show();
+                         //check if role is user and open user stage
 			}else if (l.getRole().equals("user")){
                             Parent admin_stage = FXMLLoader.load(getClass().getResource("UserStage.fxml"));
                             Scene admin_stage_scene = new Scene(admin_stage);
@@ -86,6 +91,7 @@ public class LogInController implements Initializable  {
                             app_stage.show();
                         }         
                     }else {
+                        //if password does not match, show error message
                         errorMessage.setText("Incorrect password. Try again.");
                     }	
 		} catch(Exception e) {
@@ -94,12 +100,20 @@ public class LogInController implements Initializable  {
         
     }
     
-    //defining action when exit button is clicked
+    /**
+     * Closes the application when the "Exit" button is clicked
+     * @param event 
+     */
     @FXML
     private void exitButtonFired(ActionEvent event) {
         System.exit(0);
     }
     
+    /**
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

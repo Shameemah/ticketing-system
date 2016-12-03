@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 /**
- *  This class contains the getters and setters for the different fields displayed
+ * Contains the getters and setters for the different fields displayed
  * in the AdminStage GUI, as well as the method that fades the text of the label
  * @author Shameemah Fuseini-Codjoe
  * @version NetBeans IDE 8.2 (Build 201609300101)
@@ -38,7 +38,7 @@ public class AdminStageModel {
     }
     
     /**
-     * This constructor assigns the parameters to the local variables
+     * Assigns the parameters to the local variables
      * @param ticketNum the ticket number 
      * @param summary the summary of the ticket
      * @param status the status of the ticket
@@ -190,7 +190,7 @@ public class AdminStageModel {
     }
     
     /**
-     * This method creates the effect of fading
+     * Creates the effect of fading
      * @param label the label to be faded
      */
     public void fadeText(Label label) {

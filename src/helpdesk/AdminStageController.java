@@ -7,11 +7,14 @@ package helpdesk;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -548,8 +551,10 @@ public class AdminStageController extends DAO implements Initializable {
     }
     
     private void ticketReport() {
-        int openCount=0, closedCount=0, highPId=0;   
-        String highPDesc = "";
+        int openCount=0, closedCount=0, highPId=0, openTicketNum=0;   
+        String highPDesc = "", openTicketDesc="";
+        Date dateOpened;
+        
         try {
             //execute query and store result in resultset
             ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(status) AS openCount FROM s_fuse_ticket_table WHERE status='Open'");
@@ -563,19 +568,30 @@ public class AdminStageController extends DAO implements Initializable {
             }
             System.out.println("Ratio of Open tickets:Closed tickets");
             System.out.println(openCount + ":" + closedCount + "\n");
-            System.out.println("High Priority tickets");
+            System.out.println("High Priority Tickets");
             
             //execute query and store result in resultset
-            ResultSet rs3 = connection.createStatement().executeQuery("SELECT ticket_id, description FROM s_fuse_ticket_table WHERE severity='Severity 1'");
-            while(rs3.next()){
-                highPId = rs3.getInt("ticket_id");
-                highPDesc = rs3.getString("description");
+            ResultSet rs2 = connection.createStatement().executeQuery("SELECT ticket_id, description FROM s_fuse_ticket_table WHERE severity='Severity 1'");
+            while(rs2.next()){
+                highPId = rs2.getInt("ticket_id");
+                highPDesc = rs2.getString("description");
                 System.out.println("Ticket #" + highPId + ": " + highPDesc);
             }
-            
-            
-            
-            
+            System.out.println(" ");
+            System.out.println("Open Tickets Duration");
+            ResultSet rs3 = connection.createStatement().executeQuery("SELECT s_fuse_date_info_table.ticket_number, s_fuse_date_info_table.date_opened, s_fuse_ticket_table.description "
+                    + " FROM s_fuse_date_info_table, s_fuse_ticket_table "
+                    + " WHERE s_fuse_date_info_table.ticket_number=s_fuse_ticket_table.ticket_id AND "
+                    + " s_fuse_ticket_table.status='Open'");
+            while(rs3.next()){
+                openTicketNum = rs3.getInt("ticket_number");
+                dateOpened = rs3.getDate("date_opened");
+                openTicketDesc = rs3.getString("description");
+                //get date for date_info table
+                System.out.println("Ticket #" + openTicketNum + ": " + openTicketDesc );
+                System.out.println("Opened since " + dateOpened + "\n");
+            }
+             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

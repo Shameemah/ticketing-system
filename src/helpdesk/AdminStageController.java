@@ -136,7 +136,7 @@ public class AdminStageController extends DAO implements Initializable {
     }
 
     @FXML
-    private void saveButtonFired(ActionEvent event) throws IOException {
+    public void saveButtonFired(ActionEvent event) throws IOException {
         
         //variable to retrieve ticket_id
         String lastid;
@@ -485,6 +485,8 @@ public class AdminStageController extends DAO implements Initializable {
         
         table.setItems(null);
         table.setItems(data);
+        
+        ticketReport();
     }
 
     @FXML
@@ -531,7 +533,7 @@ public class AdminStageController extends DAO implements Initializable {
         }
     }
     
-    public void clear() {
+    private void clear() {
         summary.clear();
         status.getSelectionModel().selectFirst();
         severity.getSelectionModel().select(2);
@@ -543,6 +545,27 @@ public class AdminStageController extends DAO implements Initializable {
         internalNotes.clear();
         description.clear();
         assignee.getSelectionModel().select(8);
+    }
+    
+    private void ticketReport() {
+        int openCount=0, closedCount=0;   
+        try {
+            //execute query and store result in resultset
+            ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(status) AS openCount FROM s_fuse_ticket_table WHERE status='Open'");
+            while(rs.next()){
+                openCount = rs.getInt("openCount");
+            }
+            //execute query and store result in resultset
+            ResultSet rs1 = connection.createStatement().executeQuery("SELECT COUNT(status) AS closedCount FROM s_fuse_ticket_table WHERE status='Closed'");
+            while(rs1.next()){
+                closedCount = rs1.getInt("closedCount");
+            }
+            System.out.println("Ratio of Open tickets:Closed tickets");
+            System.out.println(openCount + ":" + closedCount + "\n");
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
         
 }

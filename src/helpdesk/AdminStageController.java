@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -246,7 +247,7 @@ public class AdminStageController extends DAO implements Initializable {
                             System.out.println("Inserted records...");
                           
                           //display ticket created
-                          messageLabel.setText("Ticket number " + lastid + " created successfully");
+                          messageLabel.setText("Ticket #" + lastid + " created successfully");
                           adm.fadeText(messageLabel);
                       
                           //clear all fields
@@ -265,8 +266,17 @@ public class AdminStageController extends DAO implements Initializable {
     private void deleteButtonFired(ActionEvent event) {
         
         int value = table.getSelectionModel().getSelectedItem().getTicketNum();
-           
-         try{
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("You are deleting a ticket");
+        alert.setContentText("Are you sure you want to delete ticket #" +value + "?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == ButtonType.OK)
+        {
+            try{
 		      //Open a connection
 		      System.out.println("Connecting to a selected database...");
 		      this.connection = DriverManager.getConnection(url, username, password);
@@ -300,7 +310,7 @@ public class AdminStageController extends DAO implements Initializable {
                       System.out.println("Deleted records...");
                         
                           //display ticket deleted
-                          messageLabel.setText("Ticket number " + value + " deleted successfully");
+                          messageLabel.setText("Ticket #" + value + " deleted successfully");
                           adm.fadeText(messageLabel);
                       
                           //clear all fields
@@ -313,6 +323,11 @@ public class AdminStageController extends DAO implements Initializable {
 		      System.out.println("Error loading table");
 		   }//end try
 		   System.out.println("Goodbye!");
+        } else {
+            alert.close();
+        }
+           
+         
     }
 
     @FXML
@@ -420,14 +435,15 @@ public class AdminStageController extends DAO implements Initializable {
                             pstmt3.setInt(2, value);
                             
                             pstmt3.executeUpdate();
-                            System.out.println("Inserted records...");   
+                            System.out.println("Updated records...");   
+                             //display ticket updated
+                            messageLabel.setText("Ticket #" + value + " closed successfully");
+                            adm.fadeText(messageLabel);
+                          } else {
+                             //display ticket updated
+                             messageLabel.setText("Ticket #" + value + " updated successfully");
+                             adm.fadeText(messageLabel);
                           }
-                            
-                          
-                          //display ticket updated
-                          messageLabel.setText("Ticket number " + value + " updated successfully");
-                          adm.fadeText(messageLabel);
-                      
                           //clear all fields
                           clear();
 		   }catch(SQLException se){

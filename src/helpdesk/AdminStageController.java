@@ -47,7 +47,7 @@ import javax.sql.rowset.RowSetProvider;
 public class AdminStageController extends DAO implements Initializable {
 
     @FXML
-    private TreeView<?> tree;
+    private TreeView<String> tree;
     @FXML
     private AnchorPane details;
     @FXML

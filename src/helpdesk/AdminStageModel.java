@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package helpdesk;
 
+//imports
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,8 +13,10 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 /**
- *
- * @author shameemah1
+ *  This class contains the getters and setters for the different fields displayed
+ * in the AdminStage GUI, as well as the method that fades the text of the label
+ * @author Shameemah Fuseini-Codjoe
+ * @version NetBeans IDE 8.2 (Build 201609300101)
  */
 public class AdminStageModel {
     
@@ -32,11 +30,25 @@ public class AdminStageModel {
     private StringProperty description;
     private StringProperty assignee;
     
-    //default constructor
+    /**
+     * The default constructor
+     */
     public AdminStageModel () {
         
     }
     
+    /**
+     * This constructor assigns the parameters to the local variables
+     * @param ticketNum the ticket number 
+     * @param summary the summary of the ticket
+     * @param status the status of the ticket
+     * @param severity the severity of the ticket
+     * @param classification the classification of the ticket
+     * @param type the type of ticket
+     * @param internalNotes the internal notes entered by admin
+     * @param description the description of the ticket
+     * @param assignee who the ticket is assigned to
+     */
     public AdminStageModel(int ticketNum, String summary, String status, String severity, String classification, String type, String internalNotes, String description, String assignee){
         this.ticketNum=new SimpleIntegerProperty(ticketNum);
         this.summary=new SimpleStringProperty(summary);
@@ -177,6 +189,10 @@ public class AdminStageModel {
         assignee.set(value);
     }
     
+    /**
+     * This method creates the effect of fading
+     * @param label the label to be faded
+     */
     public void fadeText(Label label) {
         FadeTransition ft = new FadeTransition(Duration.millis(3000), label);
         ft.setFromValue(1.0);

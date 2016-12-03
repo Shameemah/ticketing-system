@@ -113,7 +113,6 @@ public class AdminStageController extends DAO implements Initializable {
     private ObservableList<AdminStageModel>data;
     
     AdminStageModel adm = new AdminStageModel();
-    String getbothvalue, finalvalue;
     
     
     /**
@@ -258,29 +257,62 @@ public class AdminStageController extends DAO implements Initializable {
 		   }catch(Exception e){
 		      //Handle errors for Class.forName
 		      e.printStackTrace();
-		   }finally{
-		      //finally block used to close resources
-		      try{
-		         if(stmt!=null)
-		         {
-		            connection.close();
-		         }
-		      }catch(SQLException se){
-		      }// do nothing
-		      try{
-		         if(connection!=null)
-		         {
-		            connection.close();
-		         }
-		      }catch(SQLException se){
-		         se.printStackTrace();
-		      }//end finally try
-		   }//end try
+		   }
 		   System.out.println("Goodbye!");
     }
 
     @FXML
     private void deleteButtonFired(ActionEvent event) {
+        
+        int value = table.getSelectionModel().getSelectedItem().getTicketNum();
+           
+         try{
+		      //Open a connection
+		      System.out.println("Connecting to a selected database...");
+		      this.connection = DriverManager.getConnection(url, username, password);
+		      System.out.println("Connected database successfully...");
+                      
+                      //Insert data into tickets table
+		      System.out.println("Deleting records into the table...");
+		      PreparedStatement pstmt = connection.prepareStatement(" DELETE FROM s_fuse_date_info_table "
+                              + " WHERE ticket_number=?");
+                      
+                      pstmt.setInt(1, value);
+                      pstmt.executeUpdate();
+                      System.out.println("Deleted records...");
+                      
+                      //Insert data into tickets table
+		      System.out.println("Deleting records into the table...");
+		      PreparedStatement pstmt2 = connection.prepareStatement(" DELETE FROM s_fuse_contact_info_table "
+                              + " WHERE ticket_number=?");
+                      
+                      pstmt2.setInt(1, value);
+                      pstmt2.executeUpdate();
+                      System.out.println("Deleted records...");
+                      
+		      //Insert data into tickets table
+		      System.out.println("Deleting records into the table...");
+		      PreparedStatement pstmt3 = connection.prepareStatement(" DELETE FROM s_fuse_ticket_table "
+                              + " WHERE ticket_id=?");
+                      
+                      pstmt3.setInt(1, value);
+                      pstmt3.executeUpdate();
+                      System.out.println("Deleted records...");
+                        
+                          //display ticket deleted
+                          messageLabel.setText("Ticket number " + value + " deleted successfully");
+                          adm.fadeText(messageLabel);
+                      
+                          //clear all fields
+                          clear();
+		   }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   }catch(Exception e){
+		      //Handle errors for Class.forName
+		      System.out.println("Error loading table");
+		   }//end try
+		   System.out.println("Goodbye!");
     }
 
     @FXML
@@ -392,7 +424,7 @@ public class AdminStageController extends DAO implements Initializable {
                           }
                             
                           
-                          //display ticket created
+                          //display ticket updated
                           messageLabel.setText("Ticket number " + value + " updated successfully");
                           adm.fadeText(messageLabel);
                       
@@ -403,24 +435,7 @@ public class AdminStageController extends DAO implements Initializable {
 		      se.printStackTrace();
 		   }catch(Exception e){
 		      //Handle errors for Class.forName
-		      e.printStackTrace();
-		   }finally{
-		      //finally block used to close resources
-		      try{
-		         if(stmt!=null)
-		         {
-		            connection.close();
-		         }
-		      }catch(SQLException se){
-		      }// do nothing
-		      try{
-		         if(connection!=null)
-		         {
-		            connection.close();
-		         }
-		      }catch(SQLException se){
-		         se.printStackTrace();
-		      }//end finally try
+		      System.out.println("Error loading table");
 		   }//end try
 		   System.out.println("Goodbye!");
         
@@ -439,7 +454,7 @@ public class AdminStageController extends DAO implements Initializable {
             }
             
         } catch (SQLException ex) {
-            System.out.println("Error loading data");
+            ex.printStackTrace();
         }
         
         ticketNumCol.setCellValueFactory(new PropertyValueFactory<>("ticketNum"));

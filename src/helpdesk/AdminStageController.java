@@ -548,7 +548,8 @@ public class AdminStageController extends DAO implements Initializable {
     }
     
     private void ticketReport() {
-        int openCount=0, closedCount=0;   
+        int openCount=0, closedCount=0, highPId=0;   
+        String highPDesc = "";
         try {
             //execute query and store result in resultset
             ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(status) AS openCount FROM s_fuse_ticket_table WHERE status='Open'");
@@ -562,6 +563,18 @@ public class AdminStageController extends DAO implements Initializable {
             }
             System.out.println("Ratio of Open tickets:Closed tickets");
             System.out.println(openCount + ":" + closedCount + "\n");
+            System.out.println("High Priority tickets");
+            
+            //execute query and store result in resultset
+            ResultSet rs3 = connection.createStatement().executeQuery("SELECT ticket_id, description FROM s_fuse_ticket_table WHERE severity='Severity 1'");
+            while(rs3.next()){
+                highPId = rs3.getInt("ticket_id");
+                highPDesc = rs3.getString("description");
+                System.out.println("Ticket #" + highPId + ": " + highPDesc);
+            }
+            
+            
+            
             
         } catch (SQLException ex) {
             ex.printStackTrace();

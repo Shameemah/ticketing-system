@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/***********************************************************************************************************
+ * Name: Shameemah Fuseini-Codjoe                                                                          *
+ * Date: 12/03/2016                                                                                        *
+ * File Name: Fuseini-Codjoe_FinalProject.docx                                                             *
+ * Source File Name: HelpDesk.java                                                                         *
+ * Title: Final Project                                                                                    *
+ *                                                                                                         *
+ * Program Description: This program is designed for the IIT OTS Support Desk. It is a ticketing system    *
+ *                      that allows users to report trouble tickets based on problems they are facing.     *
+ *                                                                                                         *
+ ***********************************************************************************************************/
+
 package helpdesk;
 
 import javafx.application.Application;
@@ -13,11 +20,17 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- *
- * @author shameemah1
+ * HelpDesk holds the main method, as well as the start method, which initializes
+ * and loads the Login screen
+ * @author Shameemah Fuseini-Codjoe
+ * @version NetBeans IDE 8.2 (Build 201609300101)
  */
 public class HelpDesk extends Application {
     
+    /**
+     * The start method initializes and loads the Login screen
+     * @param stage the JavaFx stage to be initialized
+     */
     @Override
     public void start(Stage stage) throws Exception {
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -30,6 +43,7 @@ public class HelpDesk extends Application {
     }
 
     /**
+     * The main method launches the command line arguments
      * @param args the command line arguments
      */
     public static void main(String[] args) {

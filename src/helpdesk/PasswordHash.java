@@ -1,21 +1,22 @@
 package helpdesk;
 
+//imports
 import org.mindrot.jbcrypt.BCrypt;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author shameemah1
+ * Contains the hashPassword() method and checkPassword() method
+ * @author Shameemah Fuseini-Codjoe
+ * @version NetBeans IDE 8.2 (Build 201609300101)
  */
 public class PasswordHash {
-    // Define the BCrypt workload to use when generating password hashes. 10-31 is a valid value.
+    // Define the BCrypt workload to use when generating password hashes.
     private static int workload = 12;
    
+    /**
+     * Takes the user's password and hashes it to prevent hacking
+     * @param password the password entered in the database
+     * @return hashedPassword the hashed version of the password
+     */
     public static String hashPassword(String password) {
 		String salt = BCrypt.gensalt(workload);
 		String hashedPassword = BCrypt.hashpw(password, salt);
@@ -23,6 +24,13 @@ public class PasswordHash {
 		return(hashedPassword);
 	}
     
+    /**
+     * Checks that the password entered at login matches the hash password stored 
+     * in the database
+     * @param password_plaintext the password entered at login
+     * @param stored_hash the hash used to has the password
+     * @return password_verified true or false depending on if password matches or not
+     */
     public static boolean checkPassword(String password_plaintext, String stored_hash) {
 		boolean password_verified = false;
 
